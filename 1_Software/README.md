@@ -212,11 +212,11 @@ The usual definition cannot be used to define PGCD(0, 0), since there is no grea
 
 Here's another approach to calculating the value of the **PGCD** between 2 numbers (*N1*, *N2*).
 
-- X] Assign to *N1* the value of *N2* and to *N2* the value of the remainder of the division of *N1* by *N2*;
+- [X] Assign to *N1* the value of *N2* and to *N2* the value of the remainder of the division of *N1* by *N2*;
 
-- X] Repeat until the remainder of the division is zero. 
+- [X] Repeat until the remainder of the division is zero. 
 
-- X] At this point, *N1* contains the **PGCD**.
+- [X] At this point, *N1* contains the **PGCD**.
 
 **Example**: If *N1* is 14 and *N2* is 32, we successively obtain
 
