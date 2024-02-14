@@ -1,10 +1,10 @@
 # Back to VHDL design :-)
 
-Maintenant que vous êtes devenus des experts de la vérification de composants logiciels, nous allons nous intéresser à l'application des mêmes méthodes dans le domaine du matériel.
+Now that you've become experts at verifying software components, let's take a look at applying the same methods to hardware.
 
 ## Etape 1
 
-Ecrivez un module VHDL permettant d'implanter le calcul du PGCD de manière itérative. Afin d'uniformiser le développement de vos modules VHDL, vous utiliserez le prototype suivant:
+Write a VHDL module to iteratively implement the PGCD calculation. To standardize the development of your VHDL modules, you will use the following prototype:
 
 ```
 ENTITY PGCD IS
@@ -22,11 +22,11 @@ PORT (
 END PGCD;
 ```
 
-Le signal **idata_en** indique a votre module VHDL que les entrées **idata_a** et **idata_b** sont valide et que vous devez donc démarrer un calcul. Le signal **idata_en** en théorie ne reste positionné à l'état haut qu'un seul cycle d'horloge.
+The **idata_en** signal tells your VHDL module that the **idata_a** and **idata_b** inputs are valid and that you should start a calculation. In theory, the **idata_en** signal remains high for only one clock cycle.
 
-Le signal **odata_en** est le pendant du signal **idata_en**. Il indique au reste de votre système que votre module vient de terminer son calcul et que la sortie **odata** est valide. Charge à vous de maintenir ce signal à l'état haut qu'un seul et unique front d'horloge.
+The **odata_en** signal is the counterpart of the **idata_en** signal. It tells the rest of your system that your module has just completed its calculation and that the **odata** output is valid. It's up to you to keep this signal as high as a single clock edge.
 
-Maintenant que vous avez connaissance du module que vous devez developper:
+Now you know which architecture you need to develop:
 
 - [X] Lancez l'outil Vivado et créez un projet ciblant le FPGA disponible sur la carte Nexys-4.
 
