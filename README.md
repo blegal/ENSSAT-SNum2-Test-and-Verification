@@ -7,24 +7,24 @@ The entire teaching sequence is described in the MarkDown files in directories 1
 Enjoy your reading...
 
 
-## Téléchargement (GUI)
+## Cloning the repository with a GUI
 
-Pour ceux d'entre vous qui sont sous Windows ou MacOS, la méthode la plus simple pour télécharger les fichiers est d'installer l'outil **GitHub Desktop** développé par **GitHub**.
+For those of you running Windows or MacOS, the easiest way to download files is to install the **GitHub Desktop** tool developed by **GitHub**.
 
 ```
 https://desktop.github.com
 ```
 
-Une fois l'outil installé, lancez le. Choisissez **clone repository** et entrez l'adresse suivante:
+Once the tool has been installed, launch it and choose **clone repository** and enter the following address:
 
 ```
-https://github.com/blegal/EN325-Advanced-digital-design
+https://github.com/blegal/ENSSAT-SNum2-Test-and-Verification
 ```
 
-![alt text](./icons/warning.png) Evitez de mettre des accents et des espaces dans le chemin. Cela vous évitera des soucis par la suite !
+![alt text](./icons/warning.png) Avoid using accents and spaces in the path of the directory you're going to clone into. This will save you a lot of problems later on!
 
 
-## Téléchargement (CLI)
+## Cloning the repository using CLI
 
 Pour ceux qui sont sous Linux ou ceux qui adorent les terminaux, le plus simple est d'ouvrir un terminal. Une fois dans le repertoire ou vous souhaitez créer le projet, tapez la commande suivante:
 
@@ -32,33 +32,33 @@ Pour ceux qui sont sous Linux ou ceux qui adorent les terminaux, le plus simple 
 git clone https://github.com/blegal/EN224-Test-et-verification.git
 ```
 
-## Edition et simulation de VHDL sous MacOS (Linux)
+## VHDL editing and simulation under MacOS (Linux)
 
-Pour les malchanceux qui ont décidé d'acquérir un MAC alors qu'ils doivent écrire du VHDL, il existe toutefois une solution permettant d'analyser et de simuler des codes VHDL.
+For those unlucky enough to buy a MAC when they need to write VHDL, there is a solution for analyzing and simulating VHDL code.
 
-Les utilisateurs de MacOS auront besoin d'avoir brew (https://brew.sh/index_fr). L'installation de **ghdl** sera réalisé par la commande suivante:
+MacOS users will need brew (https://brew.sh). To install **ghdl**, use the following commands:
 
 ```
 brew install ghdl
 ```
 
-Sous Linux l'utilsation, du gestionnaire de package remplira le meme role:
+Under Linux, using the package manager will fulfill the same role:
 
 ```
 sudo apt install ghdl gtkwave
 ```
 
-Pour analyser un code VHDL, utilisez la commande **ghdl -a**:
+To analyze VHDL code, use the **ghdl -a** command:
 
 ```
 ghdl -a ./src/PGCD.vhd
 ghdl -a ./src/PGCD_tb.vhd
 ```
 
-Pour générer un fichier executable permettant de simuler vos modules & lancer la simulation du testbench, il faut utiliser **ghdl -r**:
+To generate an executable file to simulate your modules & launch the testbench simulation, use **ghdl -r**:
 
 ```
 ghdl -r PGCD_tb --vcd=signaux.vcd --stop-time=1000ns
 ```
 
-Afin d'observer les signaux qui sont mémorisés dans le fichier **signaux.vcd** vous allez devoir passer par un outil externe. Les possesseur de MAC, préféreront surement ScanSion (http://www.logicpoet.com/scansion/) tandis que les utilisateurs  de Linux utiliseront gtkwave (http://gtkwave.sourceforge.net/).
+In order to observe the signals stored in the **signals.vcd** file, you'll need to use an external tool. MAC owners will probably prefer ScanSion (http://www.logicpoet.com/scansion/), while Linux users will use gtkwave (http://gtkwave.sourceforge.net/).

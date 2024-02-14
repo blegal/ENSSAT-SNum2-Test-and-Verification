@@ -1,18 +1,18 @@
-# Vérification, Assertions & tests unitaires
+# Verification, assertions & unit tests
 
 ## Introduction
 
-Cette première séance de TP vise à illustrer les différentes techniques que vous avez pu voir en cours et à vous faire réfléchir aux problèmatiques de vérification durant les étapes de conception.
+The aim of this first practical session is to illustrate the various techniques you have seen in the course and to get you thinking about verification issues during the design phase.
 
-Toutefois, vous mettrez dans cette partie en pratique ces connaissances et les principes associés que dans le domaine de la conception logicielle. Ce TP s’articule autour de la mise au point et la validation d’une fonction algorihtmique élémentaire. L’utilisation de cette fonction élémentaire possède un avantage et un inconvénient :
+However, in this part of the course, you'll only be applying this knowledge and the associated principles to the field of software development. This tutorial focuses on the development and validation of an elementary algorithmic function. The use of this elementary function has both an advantage and a disadvantage:
 
-- [X] **Avantage** : vous allez vite vous rendre compte que de vérifier quelque chose de simple n’est pas si aisé que cela…
+- [X] **Advantage**: you'll soon realize that checking something simple isn't all that easy...
 
-- [X] **Inconvénient** : certaines techniques que vous allez utiliser vont sembler complexes à mettre en œuvre pour un exemple si trivial. Toutefois, votre expérience devrait vous permettre de relativiser ce sentiment vis-à-vis des développements que vous réalisez en entreprise...
+- [X] **Disadvantage**: some of the techniques you'll be using will seem complex to implement for such a trivial example. However, your experience should enable you to put this feeling into perspective in relation to the developments you carry out in your own company...
 
-A la fin de la séance de TP vous devrez remettre à votre encadrant un rapport de TP (manuscrit) détaillant le code écrit et les techniques de vérification employées. Des commentaires pertinents sur ces techniques et leurs intérêts commenteront chacune des questions traitées. Les différents codes sources développés devront être envoyés par e-mail.
+At the end of the practical session, you will be asked to submit a practical report (handwritten) to your supervisor, detailing the code written and the verification techniques used.Relevant comments on these techniques and their benefits will comment on each of the questions addressed. The various source codes developed should be sent by e-mail.
 
-Algorithme de calcul du **PGCD** de 2 nombres entiers :
+Algorithm for calculating the **greatest common divisor** (named **PGCD** in french) of 2 integers :
 
 ```
 FONCTION PGCD( A, B )
@@ -27,202 +27,199 @@ FONCTION PGCD( A, B )
 FIN FONCTION
 ```
 
-Dans cet exercice pédagogique nous considérerons que les données qui doivent être traitées par votre algorithme une fois intégrée dans le système sont bornées dans l'intervalle **[1, 65535]**. En effet pour des valeurs d'entrée beaucoup plus grandes le nombre d'itérations nécessaires afin de faire converger l'algorihtme pourraient être trop important.
+In this pedagogical example, we'll assume that the data to be processed by your algorithm once it has been integrated into the system will initially be limited to the interval **[1, 65535]**. Indeed, for much larger input values, the number of iterations required to converge could be too high.
 
 
-## Etape 1
+## Step 1
 
-A partir de l'algorithme décrit ci-dessus écrivez une fonction **C/C++** implantatant le calcul du **PGCD** de deux nombres entiers. Le prototype de la fonction que vous devez écrire est fourni ci-dessous:
+From the algorithm described above, write a **C/C++** function implementing the calculation of the **PGCD** of two integers. The prototype of the function you need to write is provided below:
 
 ```
 int PGCD(const int A, const int B);
 ```
 
-Afin de vous aider, le repertoire **Etape_1** contient les fichiers nécessaires à cette tache.
+To help you, the **Step_1** directory contains the files required for this task.
 
-- [X] Reprenez l’algorithme de calcul du PGDC et écrivez la fonction **C/C++** correspondante dans le fichier **main.c**.
-- [X] Testez et validez votre code en écrivant un **main** qui d’exécute votre fonction et affiche les résultats dans le terminal.
-- [X] Executez votre programme **main** afin de tester un couple de données.
-- [X] Maintenant, choississez une dizaine de couples de valeurs permettant de bien tester votre production.
+- [X] Take the GCD algorithm and write the corresponding **C/C++** function in the **main.c** file.
+- [X] Test and validate your code by writing a **main** that executes your function and displays the results in the terminal.
+- [X] Execute your **main** program to test a data pair.
+- [X] Now, choose about ten pairs of values to test your program.
 
-:page_with_curl: Analyser votre capacité a écrire un programme fonctionnel du premier coup même si l'algorithme est trivial.
+:page_with_curl: Analyze your ability to write a functional program on the first try, even if the algorithm is trivial.
 
+## Step 2
 
-## Etape 2
+Now that you've tested your function manually, we'll use a semi-automated approach to extend the number of tests performed.
 
-Maintenant que vous avez testé manuellement votre fonction, nous allons utiliser une approche semi-automatisée qui va permettre d'étendre le nombre de tests éffectués.
+- [X] Write two functions (RandA and RandB) that randomly generate values for A and B between 0 and 65535.
 
-- [X] Ecrivez deux fonctions (RandA et RandB) qui permettent de générer aléatoirement des valeurs de A et B comprises entre 0 à 65535.
+- [X] Use these 2 functions to test your function with 20 different pairs of values.
 
-- [X] Utilisez ces 2 fonctions afin de tester votre fonction à l’aide de 20 couples de valeurs différentes.
+- [X] Make sure that the results are correct.
 
-- [X] Vous vous **assurerez** que les résultats sont corrects.
+- [X] What happens if you increase the number of values tested to 2000? If nothing strange happens, increase the number of tests to 200,000...
 
-- [X] Que se passe t'il si vous augmentez le nombre de valeurs testées à 2000 ? Si rien d'étrange ne se produit augmentez le nombre de tests jusqu'à 200000...
+- [X] Correct this little program defect.
 
-- [X] Corrigez ce petit défaut de conception.
+:bulb: If you have no idea why (and AFTER THINKING...), ask your teacher to help you...
 
-:bulb: Si vous n'avez pas d'idées du pourquoi (et APRES AVOIR REFLECHI...) faites vous aider par votre enseignant...
-
-:page_with_curl: Analyser votre capacité a écrire un programme fonctionnel du premier coup même si l'algorithme est trivial.
-
-
-## Etape 3
-
-Le nombre de couples d'entrées possibles pour votre fonction est égale à (65536 * 65536) = 4294836225. Pour le moment vous n'avez testé que 20 valeurs...
+:page_with_curl: Analyze your ability to write a functional program on the first try, even if the algorithm is trivial.
 
 
-- [X] Proposez une solution afin d'étendre le nombre de test éffectué à 65536 valeurs (soit 0,0015% des couples possibles) **sans que vous ayez besoin de valider manuellement les résultats**.
+## Step 3
 
-- [X] Modifiez votre code **C/C++** en conséquence.
-
-- [X] Validez le fait que votre implantation de l'algorithme **PGCD** fonctionne sur l'ensemble de ces valeurs aléatoires.
-
-:bulb: Si vous n'avez pas d'idées sur l'approche à employer, au bout de quelques minutes (de reflexion), faites vous aider par votre enseignant...
-
-:page_with_curl: Analysez les avantages et les limitations de l'approche mise en oeuvre.
-
-## Etape 4
-
-Mettez en place les mécanismes d’assertion vus en cours (à partir de la planche 130). Afin de vous assurer que les valeurs d'entrée et de sortie de votre fonction **PGCD** sont toujours cohérentes.
-
-- [X] **Reprenez le code que nous avez écrit durant l'étape 2**.
-
-- [X] Dans un premier temps vous n'insérerez que des pré-conditions.
-
-- [X] Vérifiez que les assertions réalisent bien la tache qui leur est dévolue lors de l'éxécution de votre programme.
-
-- [X] Ensuite, vérifiez que lorsque l’on compile le programme en mode « final » ces dernières disparaissent.
-
-:page_with_curl: Donnez l’intérêt et les limitaions liés à l'utilisation des pré-conditions dans une fonction.
+The number of possible input pairs for your function is equal to (65536 * 65536) = 4294836225. So far, you've only tested 20 values...
 
 
-## Etape 5
+- [X] Propose a solution to extend the number of tests performed to 65536 values (i.e. 0.0015% of possible pairs) **without having to manually validate the results**.
 
-Maintenant que vous maitrisez le fonctionnement des assertions dans un programme logiciel:
+- [X] Modify your **C/C++** code accordingly.
 
-- [X] Intégrez maintenant toutes les pré-conditions et post-condition possibles dans votre fonction (toujours sans toucher à la partie calculatoire).
+- [X] Validate that your implementation of the **GCD** algorithm works on all these random values.
 
-- [X] Quel est l’intérêt de mettre des post-conditions dans un code ?
+:bulb: If you don't have any ideas about the approach to use, after a few minutes (of reflection), ask your teacher to help you...
 
-- [X] Quelle est la limite de post-conditions ?
+:page_with_curl: Analyze the advantages and limitations of the approach used.
 
-:page_with_curl: Donnez l’intérêt et les limitaions liés à l'utilisation des post-conditions.
+## Step 4
+
+Implement the assertion mechanisms seen in the lesson (from page 130). To ensure that the input and output values of your **GCD** function are always consistent.
+
+- [X] **Retake the code we wrote in step 2**.
+
+- [X] Initially, insert only pre-conditions.
+
+- [X] Check that the assertions perform the task assigned to them when your program is executed.
+
+- [X] Next, check that when you compile the program in "final" mode, the assertions disappear.
+
+:page_with_curl: What are the advantages and limitations of using preconditions in a function ?
+
+## Step 5
+
+Now that you've mastered how assertions work in a software program:
+
+- [X] Integrate all possible pre-conditions and post-conditions into your function (without affecting the computational part).
+
+- [X] What's the advantage of including post-conditions in your code?
+
+- [X] What is the limit of post-conditions?
+
+:page_with_curl: Give the advantages and limitations of using post-conditions.
 
 
-## Etape 6
+## Step 6
 
-Développez un programme **main** permettant de réaliser des tests unitaires sur la fonction **PGCD** que vous avez développée.
+Develop a **main** program to run unit tests on the **PGCD** function you have developed.
 
-- [X] Ces tests unitaires devront couvrir un jeu de tests dont le nombre des données ainsi que les valeurs est laissé à votre appréciation.
+- [X] These unit tests will have to cover a set of tests whose number of data items and values is left to your discretion.
 
-- [X] Pour faire propre, dans cette question vous allez discociez la fonction PGDC de votre fichier **main.c**. Creéz un fichier **pgcd.h** et **pgcd.c**.
+- [X] For the sake of clarity, in this question you're going to disconnect the PGDC function from your **main.c** file. Create a file **pgcd.h** and **pgcd.c**.
 
-- [X] Développez ce code, modifiez votre **makefile** et validez le bon fonctionnement du système.
+- [X] Develop this code, modify your **makefile** and validate that the system works correctly.
 
-Grace à l'étape que vous venez d'effectuer, vous pouver tester facilement votre fonction **PGCD** à chaque fois que vous la modifierez. Ce programme **main** qui vérifie que les résultats d'execution sont toujours valides permet de s'assurer que votre fonction **PGCD** ne régresse pas. On parle de tests de non-régression.
+Thanks to the step you've just completed, you'll be able to easily test your **PGCD** function each time you modify it. This **main** program, which checks that the execution results are still valid, ensures that your **PGCD** function does not regress. This is known as non-regression testing.
 
-Dans un context industriel, on viendrait enrichir la liste des tests lorsque l'on découvre un bug. Les valeurs problematiques sont ajoutées comme des tests (assert). Les valeurs précédement présentes permettent de vérifier que la correction du bug n'a rien "cassé".
+In an industrial context, we would add to the list of tests when we discover a bug. Problem values are added as tests (assert). Previously present values are used to check that correcting the bug has not "broken" anything.
 
-:page_with_curl: Donnez l’intérêt et les limitaions liés à l'utilisation de tests unitaires lors du développement d'une fonctionnalité.
+:page_with_curl: Describe the advantages and limitations of using unit tests when developing a feature.
 
+## Step 7
 
-## Etape 7
+The design of test programs such as the one you wrote in step 6 is common in industrial-scale projects. However, frameworks exist to simplify the writing and analysis of results. Here, we're going to use the Catch2 framework (https://github.com/catchorg/Catch2).
 
-La conception de programmes de test tel que celui que vous avez écrit durant l'étape 6 est fréquent lorsque le projet est d'envergure industrielle. Cependant, des frameworks existent afin de simplifier la rédaction et l'analyse des résultats. Nous allons ici utiliser le framework Catch2 (https://github.com/catchorg/Catch2).
+With this framework, you don't need to write a main function:
 
-Ce framework va vous permettre sans que vous ayez besoin d'écrire une fonction main:
+- [X] to express test sequences,
 
-- [X] d'exprimer les séquences de tests,
+- [X] classify your tests into categories (several application scenarios, etc.),
 
-- [X] de classer vos test en catégories (plusieurs scénarios applicatifs, etc.),
-
-- [X] à l'execution de compter le nombre de tests réussis / échoués,
+- [X] count the number of tests passed/failed at runtime,
 
 - [X] etc.
 
-Afin de pouvoir utiliser ce framework écrit en **C++** il va falloir opérer quelques changements dans notre projet. Dans le répertoire étape 7, le fichier **main.c** doit être renommé **main.cpp*. De plus dans le fichier **makefile**, l'invocation de **gcc** a été remplacée par **g++**.
+In order to use this framework written in **C++**, we'll need to make a few changes to our project. In the step 7 directory, the **main.c** file must be renamed **main.cpp*. Also, in the **makefile**, the **gcc** invocation has been replaced by **g++**.
 
-- [X] Ajoutez vos fichiers **pgcd.h** et **pgcd.c** dans le repertoire **src** de l'étape 7.
+- [X] Add your **pgcd.h** and **pgcd.c** files to the **src** directory from step 7.
 
-- [X] Renommez le fichier **pgcd.c** en **pgcd.cpp**.
+- [X] Rename the **pgcd.c** file to **pgcd.cpp**.
 
-Maintenant dans le fichier **main.cpp** vous allez décrire les séquences de test. Pour cela, vous allez vous appuyer sur la documentation du framework Catch2 (https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md).
+Now, in the **main.cpp** file, you will describe the test sequences. To do this, refer to the Catch2 framework documentation (https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md).
 
-- [X] Créez 2 *test-cases*:
-  - Le premier *test-case* sera en charge de tester le fonctionnement normal de votre fonction **PGCD**.
-  - Le second s'occupera des cas particuliers (ex. la valeur zéro).
+- [X] Create 2 *test-cases*:
+  - The first *test-case* will test the normal operation of your **PGCD** function.
+  - The second will deal with special cases (e.g. the zero value).
 
-- [X] Chaque *test-case* sera décomposé en 3 sections:
-  - La premiere section se focalisera sur les cas d'usage ou (A > B),
-  - La seconde section se focalisera sur les cas d'usage ou (A < B),
-  - La deniere section traitera sur les cas d'usage ou (A = B).
+
+- [X] Each *test-case* will be broken down into 3 sections:
+  - The first section will focus on use cases where (A > B),
+  - The second section will focus on use cases or (A < B),
+  - The last section will deal with use cases or (A = B).
   
 
-Une fois la description des séquences de test éffectuées:
+Once the test sequences have been described:
 
-- [X] Compilez les codes logiciels à l'aide du makefile fourni.
-- [X] Executez le programme ainsi obtenu et observez le résultat.
-- [X] Modifiez vos tests afin de faire apparaitre des erreurs lors de l'execution.
+- [X] Compile the software code using the makefile provided.
+- [X] Execute the resulting program and observe the results.
+- [X] Modify your tests so that errors appear during execution.
 
-:page_with_curl:  Concluez sur l’intérêt et les limitaions liés à l'utilisation d'un framework permettant d'executer des tests unitaires.
+:page_with_curl: Conclude on the advantages and limitations of using a framework for executing unit tests.
 
 
-## Etape 8
 
-Pour le moment vous avez codé manuellement les valeurs de test apres avoir idéntifié un couple de valeurs puis calculé le résultat attendu. L'approche est éfficace, cependant elle s'avere chronophage si l'on souhaite tester un grand nombre de valeurs.
+## Step 8
 
-Afin de simplifier la conception des procédures de test, on utilise quand cela est possible des valeurs provenant de modeles de référence via par exemple l'utilisation de fichiers externes.
+So far, you've manually coded the test values after identifying a pair of values and calculating the expected result. This approach is efficient, but time-consuming if you want to test a large number of values.
 
-Les valeurs présentes dans les fichiers externes (données de référence) sont généralement issues d’une autre implantation de l’algorithme (golden model). Cette implantation de référence est généralement un code logiciel de plus haut niveau (Matlab, Python, etc.).
+To simplify the design of test procedures, we use values from reference models whenever possible, for example by using external files.
 
-Dans le cas présent, vous allez:
+The values present in external files (reference data) are generally taken from another implementation of the algorithm (golden model). This reference implementation is generally a higher-level software code (Matlab, Python, etc.).
 
-- [X] Utiliser à votre convenance, *Matlab*, *Excel*, *OpenOffice* ou *LibreOffice* pour générer 65536 triplets ([**A**], [**B**], [**résultat**]).
+In this case, you will:
 
-- [X] Stocker ces données dans 3 fichers de type texte. Ces fichiers seront nommés [**ref_A.txt**], [**ref_B.txt**] et [**ref_C.txt**].
+- [X] Use *Matlab*, *Excel*, *OpenOffice* or *LibreOffice* to generate 65536 triplets ([**A**], [**B**], [**result**]).
 
-Une fois que ces étapes préparatoires sont terminées:
+- [X] Store this data in 3 text files. These files will be named [**ref_A.txt**], [**ref_B.txt**] and [**ref_C.txt**].
 
-- [X] **Reprenez le code C que vous avez écrit durant l'étape 6**.
+Once these preparatory steps have been completed:
 
-Puis:
+- [X] **Take over the C code you wrote in step 6**.
 
-- [X] Ecrivez un programme (*main*) permettant de lire les valeurs de **A** et **B** dans les fichiers (**ref_A.txt** et **ref_B.txt**).
+Then:
 
-- [X] Ecrivez les résultats du calcul du PGDC dans un autre fichier de type texte (**resu_C.txt**).
+- [X] Write a program (*main*) to read the values of **A** and **B** from the files (**ref_A.txt** and **ref_B.txt**).
 
-- [X] Executez votre programme afin de générer votre fichier contenant les résultats.
+- [X] Write the results of the PGDC calculation to another text file (**resu_C.txt**).
 
-- [X] Utilisez la commande **diff** ou l'outil **meld** (ou **winmerge** pour ceux étant sous Windows) afin de comparer les résultats théoriques et pratiques (**ref_C.txt** et **resu_C.txt**).
+- [X] Execute your program to generate your results file.
 
-:page_with_curl: Une fois de plus, vous conclurez sur l’intérêt et les limitaions de l'approche...
+- [X] Use the **diff** command or the **meld** tool (or **winmerge** for Windows users) to compare the theoretical and practical results (**ref_C.txt** and **resu_C.txt**).
 
-<!-- 
-- Quels sont les avantages et les inconvénients de cette approche par rapport à la génération aléatoire de valeurs de test ?
--->
+:page_with_curl: Once again, you'll come to a conclusion about the advantages and limitations of this approach...
+
 
 # Annexes
 
 
-## Les cas particuliers...
+## Specific cases...
 
-En considérant que tout nombre entier est un diviseur de zéro (car 0 × b = 0 quel que soit b) il vient que, pour tout entier non nul b, PGCD(0, b) = PGCD(b, 0) = b.
+Considering that every integer is a divisor of zero (because 0 × b = 0 whatever b is), for every non-zero integer b, PGCD(0, b) = PGCD(b, 0) = b.
 
-La définition usuelle ne permet pas de définir PGCD(0, 0) puisqu'il n'existe pas de plus grand diviseur de 0. On pose par convention : PGCD(0, 0) = 0.
+The usual definition cannot be used to define PGCD(0, 0), since there is no greater divisor of 0. By convention, PGCD(0, 0) = 0.
 
 
-## Une autre approche
+## Another approach
 
-Voici une autre approche permettant de calculer la valeur du **PGCD** entre 2 nombres (*N1*, *N2*).
+Here's another approach to calculating the value of the **PGCD** between 2 numbers (*N1*, *N2*).
 
-- [X] Assignez à *N1* la valeur de *N2* et à *N2* la valeur du reste de la division de *N1* par *N2*;
+- X] Assign to *N1* the value of *N2* and to *N2* the value of the remainder of the division of *N1* by *N2*;
 
-- [X] Recommencez jusqu'à ce que le reste de la division soit nul. 
+- X] Repeat until the remainder of the division is zero. 
 
-- [X] A ce moment, *N1* contient le **PGCD**.
+- X] At this point, *N1* contains the **PGCD**.
 
-**Exemple**: Si *N1* vaut 14 et *N2* vaut 32, on obtient successivement
+**Example**: If *N1* is 14 and *N2* is 32, we successively obtain
+
 
 | Iter. | N1  | N2            |
 | ----- |:---:| -------------:|
