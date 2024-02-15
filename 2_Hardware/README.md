@@ -2,7 +2,7 @@
 
 Now that you've become experts at verifying software components, let's take a look at applying the same methods to hardware.
 
-## Etape 1
+## Step 1
 
 Write a VHDL module to iteratively implement the PGCD calculation. To standardize the development of your VHDL modules, you will use the following prototype:
 
@@ -28,43 +28,43 @@ The **odata_en** signal is the counterpart of the **idata_en** signal. It tells 
 
 Now you know which architecture you need to develop:
 
-- [X] Lancez l'outil Vivado et créez un projet ciblant le FPGA disponible sur la carte Nexys-4.
+- [X] Launch the Vivado tool and create a project targeting the FPGA available on the Nexys-4 board.
 
-- [X] **Déssinez** la machine d'états qui va vous permettre d'implanter le calcul du PGCD de 2 nombres.
+- [X] **Draw** the state machine that will enable you to compute the PGCD of 2 numbers.
 
-- [X] Décrivez votre module PGDC en langage VHDL.
+- [X] Describe your PGDC module in VHDL language.
 
-- [X] Ecrivez un testbench permettant de vérifier son bon fonctionnement. Dans un premier temps vous limiterez cette approche à 3 ou 4 couples de valeurs que vous coderez en dur dans le testbench.
+- [X] Write a testbench to verify its correct operation. Initially, you will limit this approach to 3 or 4 pairs of values, which you will hard-code into the testbench.
 
-:bulb: Pour générer le squelette de votre testbench en vhdl vous pouvez utiliser un générateur en ligne:
+:bulb: To generate the skeleton of your testbench in vhdl, you can use an online generator:
 
 - [X] https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl
 - [X] https://vhdl.lapinoo.net/testbench/
 
-:page_with_curl: Dans votre rapport vous fournirer une représentation graphique lisible et compréhensible de votre machine d'états. Vous indiquerez aussi les valeurs que vous avez employées afin de valider son bon fonctionnement.
+:page_with_curl: In your report, you'll provide an easy-to-understand graphical representation of your state machine. You should also indicate the values you have used to validate its correct operation.
 
 
-## Etape 2
+## Step 2
 
-Maintenant que vous possédez, une version fonctionnelle du module de calcul du PGDC vous pouvez commencer l'instrumentation de votre code source à l'aide d'assertions.
+Now that you have a working version of the PGDC computation module, you can start instrumenting your source code with assertions.
 
-- [X] Inserez dans votre module les mêmes assertions que celles que vous avez utilisées dans votre code **C/C++**.
-- [X] Vérifiez le bon fonctionnement du module instrumenté à l'aide d'une simulation.
+- [X] Insert in your module the same assertions you used in your **C/C++** code.
 
-:bulb: Vous trouverez des informations relatives a l'utilisation des assertions en VHDL ici:
+- [X] Verify the correct operation of the instrumented module using a simulation.
+
+:bulb: You can find information on using assertions in VHDL here:
 
 ```
 https://insights.sigasi.com/tech/vhdl-assert-and-report
 ```
 
-:page_with_curl: Dans votre rapport vous indiquerez les assertions que vous avez introduites. De plus, vous indiquerez quels usages sont possibles en VHDL en on en C/C++.
+:page_with_curl: In your report, you'll indicate the assertions you've introduced. In addition, you should indicate the possible uses of VHDL in C/C++.
 
+## Step 3
 
-## Etape 3
+Handwriting test values in VHDL and validating them by eye is not a viable long-term approach. It's time-consuming and plantogenic. So now we're going to automate your component test procedure. To do this, we're going to reuse the **C** code you wrote in phase 1.
 
-Ecrire des valeurs de test à la main en VHDL est les valider à l'oeil nu n'est pas une approche viable à long terme. En effet, cette derniere est chronophage et plantogene. On va donc maintenant automatiser la procédure de test de votre composant. Pour ce faire, on va réutiliser le code **C** que vous avez écrit dans la phase 1.
-
-Pour pouvoir tester votre module VHDL, vous avez surement du écrire des lignes similaires à celles présentées ci-dessous:
+To be able to test your VHDL module, you may have written lines similar to those shown below:
 
 ```
 idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 10, 32) );
@@ -75,9 +75,9 @@ idata_en <= '0';
 wait for 1000 ns;
 ```
 
-L'approche est interessante MAIS vous êtes obligé de regarder les signaux a chaque simulation afin de déterminer si le comportement de votre module est correct ou pas. De plus vous allongé la durée de simulation car vous ne maitrisez pas finement le temps d'execution du composant.
+The approach is interesting BUT you are obliged to look at the signals at each simulation to determine whether the behavior of your module is correct or not. Moreover, you're extending the simulation time because you don't have full control over the component's execution time.
 
-Afin de palier à ces limitations, vous pouvez utiliser l'approche suivante:
+To overcome these limitations, you can use the following testing approach:
 
 ```
 idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 10, 32) );
@@ -99,11 +99,11 @@ while odata_en = '0' loop
 end loop;
 ```
 
-Ainsi les tests s'enchaineront automatiquement les uns apres les autres des que votre module VHDL a renvoyé une valeur. Cela évite les erreurs de timing lors de l'injection des données de test.
+In this way, tests are automatically run one after the other as soon as your VHDL module has returned a value. This avoids timing errors when injecting test data.
 
-- [X] Modfiez votre testbench afin de tester et de valider cette approche.
+- [X] Modify your testbench to test and validate this approach.
 
-La situation est plus favorable que précédement, cependant le concepteur a toujours un role a jouer dans la procédure de test. En effet, la vérification des résultats se fait encore de manière visuelle. A l'aide des mécanismes d'assertion nous allons corriger cela.
+The situation is better than before, but the designer still has a role to play in the test procedure. In fact, results are still verified visually. Using assertion mechanisms, we're going to correct this.
 
 ```
 idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 10, 32) );
@@ -127,13 +127,13 @@ end loop;
 ASSERT UNSIGNED(odata) = TO_UNSIGNED( 6, 32) SEVERITY ERROR;
 ```
 
-- [X] Modfiez votre testbench afin de tester et de valider cette approche.
+- [X] Modify your testbench to test and validate this approach.
 
-D'un coup le concepteur a beaucoup moins de travail à réaliser. En effet, il suffit maintenant de vérifier que le simulateur ne s'est pas arrété lors de la simulation avec un message d'erreur. 
+As a result, the designer has much less work to do. All that's needed now is to check that the simulator hasn't crashed during simulation with an error message. 
 
-Toutefois, il est possible de faire encore mieux:
+However, it's possible to do even better:
 
-- [X] Reprenez un de vos programme en **C/C++** écrit dans la premiere partie et modifier la fonction **main** afin de générer automatiquement les blocs VHDL utilisés pour le test (cf. ci-dessous). Pour ce faire l'utilisation de quelques printf devrait suffir...
+- [X] Use one of your **C/C++** programs written in the first part and modify the **main** function to automatically generate the VHDL blocks used for testing (see below). A few printf commands should be enough...
 
 ```
 idata_a  <= STD_LOGIC_VECTOR( TO_UNSIGNED( 18, 32) );
@@ -147,42 +147,43 @@ end loop;
 ASSERT UNSIGNED( odata ) = TO_UNSIGNED( 6, 32) SEVERITY ERROR;
 ```
 
-- [x] Executez votre programme et faites un copier-coller des informations affichées dans votre terminal directement dans votre testbench.
-- [x] Lancez une simuation pour vérifier que cela fonctionne et valider l'interet de cette approche.
+- [x] Run your program and copy and paste the information displayed in your terminal directly into your testbench.
 
-:page_with_curl: Dans votre rapport vous commenterez l'avantage de cette approche et indiquerez son inconvénient majeur.
+- [x] Run a simulation to check that it works and validate the benefits of this approach.
+
+:page_with_curl: In your report, comment on the advantages of this approach and point out its major drawbacks.
 
 
-## Etape 4
+## Step 4
 
-Une autre approche évitant de devoir modifier votre fichier testbench en permance consiste à passer les données par des fichiers textuels. Le language VHDL permet de lire et d'écrire dans des fichiers textuels, cependant c'est plus compliqué qu'en lanage C...
+Another approach that avoids having to modify your testbench file all the time is to pass data through text files. The VHDL language allows you to read and write to text files, but this is more complicated than in C...
 
-Vous trouverez un exemple en suivant le lien ci-dessous:
+For an example, click on the link below:
 
 https://www.nandland.com/vhdl/examples/example-file-io.html
 
-- [X] Modifiez votre testbench afin de lire les données destinées à votre module VHDL ainsi que les résultats à partir de fichiers textuels.
+- [X] Modify your testbench to read data for your VHDL module and results from text files.
 
-Avant de pouvoir lancer la simulation du système vous devrez générer des fichiers de test à partir du code **C/C++** fourni dans le répertoire **Etape_4/test_generator**. Cette étape est obligatoire car l'API VHDL d'acces aux fichiers s'attend à trouver des vecteurs de bits.
+Before you can run the system simulation, you'll need to generate test files from the **C/C++** code provided in the **Step_4/test_generator** directory. This step is mandatory, as the VHDL file access API expects to find bit vectors.
 
-- [X] Lancez une simuation pour vérifier que cela fonctionne et valider l'interet de cette approche.
+- [X] Run a simulation to check that it works and validate the benefits of this approach.
 
-:page_with_curl: Dans votre rapport vous comparerez cette approche avec la précédente.
+:page_with_curl: In your report, compare this approach with the previous one.
 
 
-## Etape 5
+## Step 5
 
-Afin de mieux comprendre le fonctionnement du module en simulation et surtout estimer ses performances nous souhaitons connaitre le nombre de cycles d'horloge nécessaire à chaque calcul de PGDC.
+To better understand how the module works in simulation and, above all, to estimate its performance, we need to know the number of clock cycles required for each PGDC calculation.
 
-- [X] Ajoutez dans votre module PGCD les lignes de codes nécessaires afin d'implanter cette nouvelle fonctionnalité. 
+- [X] Add the necessary lines of code to your PGCD module to implement this new functionality. 
 
-- [X] Un affichage dans le terminal fournira a la fin de chaque calcul le temps nécessaire à sa complétion. Pour faire un **printf** en VHDL vous pouvez utiliser le code suivant:
+- [X] At the end of each calculation, the terminal will display the time required to complete it. To do a **printf** in VHDL, you can use the following code:
 
 ```
 REPORT "mon_unsigned : " & integer'image(to_integer( mon_unsigned ));
 ```
 
-**Note:** Afin de ne pas dégrader les performances du module post-synthèse vous prendrez soin d'insérer les annotations suivantes aux endroits pertinants.
+**Note:** To avoid degrading the performance of the post-synthesis module, please insert the following annotations in the relevant places.
 
 ```
 -- pragma translate_on
@@ -190,49 +191,51 @@ REPORT "mon_unsigned : " & integer'image(to_integer( mon_unsigned ));
 ```
 
 
-## Etape 6
+## Step 6
 
-Les résultats fournis par le moniteur que vous venez d'inserer dans votre module démontrent qu'il peut être nécessaire d'attendre jusqu'à 65535 cycles d'horloge avant qu'une donnée ne soit calculée... Ce délai est bien trop long :-(
+The results provided by the monitor you've just inserted in your module show that it may be necessary to wait up to 65535 clock cycles before any data is calculated... This is far too long :-(
 
-- [x] Proposez une solution permettant de réduire (facilement) cette durée d'au moins d'un facteur 16.
-- [X] A l'aide des bancs de test dévelopés précédement, validez la nouvelle implantation de votre module.
+- [X] Suggest a solution that would (easily) reduce this time by at least a factor of 16.
 
-:page_with_curl: Dans votre rapport vous indiquerez la méthode que vous avez employée afin d'atteindre votre objectif. De plus vous analyserez l'impact des modifications de votre code VHDL sur la structure du testbench.
+- [X] Using the test benches developed earlier, validate the new implementation of your module.
 
-
-## Etape 7
-
-Toutes les étapes de vérification que nous avons déployées jusqu'à maintenant vous ont permis de valider en simulation votre composant. Toutefois, en simulation certains défaut peuvent ne pas apparaitre. Afin de s'assurer du bon fonctionnement de votre circuit nous allons donc faire une vérification sur carte FPGA.
-
-Afin de vous simplifier la vie, votre enseignant met à votre disposition les outils nécessaires à la communication avec la carte Nexys-4.
-
-- [X] Ajoutez les fichiers VHDL présents dans le repertoire Etape_6 à votre projet Vivado.
-- [X] Ajoutez le fichier de contraintes dédié à la carte Nexys-4.
-- [X] Lancez la génération du bitstream.
-- [X] Une fois toutes ces étapes réalisées, configurer le FPGA à l'aide du bitstream.
-
-Afin de transmettre des données sur la carte, vous devrez compiler et executer le programme **C/C++** se trouvant dans le repertoire **c_codes**.
-
-- [X] Mettez en place la manipulation et validez le bon fonctionnement du système.
-
-:page_with_curl: Identifiez les avantages et les inconvénients de l'approche utilisée afin de valider le comportement de votre module sur carte FPGA.
+:page_with_curl: In your report, you will indicate the method you used to achieve your objective. You will also analyze the impact of your VHDL code modifications on the testbench structure.
 
 
-## Etape 8
+## Step 7
 
-L'approche employée ici pour valider le système sur carte est comme vous vous en doutez insuffisante...
+All the verification steps we have deployed so far have enabled you to validate your component in simulation. However, some faults may not appear in simulation. To make sure your circuit is working properly, we're going to check it on an FPGA board.
 
-- [X] Proposez une approche **originale** et **personnelle** afin de solutionner ce problème.
+To make your life easier, your teacher will provide you with the tools you need to communicate with the Nexys-4 board.
 
-## Etape 9
+- [X] Add the VHDL files in the Etape_6 directory to your Vivado project.
+- [X] Add the constraints file dedicated to the Nexys-4 board.
+- [X] Start bitstream generation.
+- [X] Once all these steps have been completed, configure the FPGA using the bitstream.
 
-Afin de mettre au point un système numérique sur carte, il est parfois nécessaire d'analyser ce qui s'y passe en **temps réel**. Jusqu'à maintenant pour y arriver vous avez ressorti la valeur des signaux internes sur des LEDS, etc.  Cependant, vous avez pu constatez que ces approches sont chronophrages et limitées !
+To transmit data to the board, you'll need to compile and run the **C/C++** program in the **c_codes** directory.
 
-Dans cette derniere partie, nous allons nous interesser à l'analyse en temps réel des données traitées par notre module PGDC.
+- [X] Set up the operation and check that the system is working correctly.
 
-Pour cela, référez vous au document de référence produit par Xilinx ([ug936](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug936-vivado-tutorial-programming-debugging.pdf)). Les informations essentielles sont situées à partir de la page 16.
+:page_with_curl: Identify the advantages and disadvantages of the approach used to validate the behavior of your module on an FPGA board.
 
-- [X] Utilisez cette technique afin d'observer en temps réel le traitement de vos données dans le module PGDC.
-- [X] Concluez sur les avantages et les inconvénients de cette approche.
 
-:page_with_curl: Identifiez les avantages et les inconvénients de l'approche mise en oeuvre.
+## Step 8
+
+The approach used here to validate the board-based system is, as you might expect, inadequate...
+
+- [X] Suggest an **original** and **personal** approach to solving this problem.
+
+## Step 9
+
+In order to develop a digital system on a board, it is sometimes necessary to analyze what's going on there in **real time**. Up to now, this has been done by plotting the value of internal signals on LEDs, etc. But these approaches are time-consuming and limited!  However, these approaches are time-consuming and limited!
+
+In this final section, we'll look at the real-time analysis of data processed by our PGDC module.
+
+Please refer to the reference document produced by Xilinx ([ug936](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug936-vivado-tutorial-programming-debugging.pdf)). Essential information can be found starting on page 16.
+
+- [X] Use this technique to observe in real time the processing of your data in the PGDC module.
+
+- [X] Conclude on the advantages and disadvantages of this approach.
+
+:page_with_curl: Identify the advantages and disadvantages of this approach.
