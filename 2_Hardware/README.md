@@ -4,7 +4,7 @@ Now that you've become experts at verifying software components, let's take a lo
 
 ## Step 1
 
-Write a VHDL module to iteratively implement the PGCD calculation. To standardize the development of your VHDL modules, you will use the following prototype:
+Write a VHDL module to iteratively implement the GCD calculation. To standardize the development of your VHDL modules, you will use the following prototype:
 
 ```
 ENTITY PGCD IS
@@ -30,7 +30,7 @@ Now you know which architecture you need to develop:
 
 - [X] Launch the Vivado tool and create a project targeting the FPGA available on the Nexys-4 board.
 
-- [X] **Draw** the state machine that will enable you to compute the PGCD of 2 numbers.
+- [X] **Draw** the state machine that will enable you to compute the GCD of 2 numbers.
 
 - [X] Describe your PGDC module in VHDL language.
 
@@ -175,7 +175,7 @@ Before you can run the system simulation, you'll need to generate test files fro
 
 To better understand how the module works in simulation and, above all, to estimate its performance, we need to know the number of clock cycles required for each PGDC calculation.
 
-- [X] Add the necessary lines of code to your PGCD module to implement this new functionality. 
+- [X] Add the necessary lines of code to your GCD module to implement this new functionality. 
 
 - [X] At the end of each calculation, the terminal will display the time required to complete it. To do a **printf** in VHDL, you can use the following code:
 
